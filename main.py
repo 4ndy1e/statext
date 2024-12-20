@@ -1,19 +1,16 @@
 def countChars(words):
   words = words.lower()
-
-  alphabet = {
-    'a': 0, 'b': 0, 'c': 0, 'd': 0, 'e': 0,
-    'f': 0, 'g': 0, 'h': 0, 'i': 0, 'j': 0,
-    'k': 0, 'l': 0, 'm': 0, 'n': 0, 'o': 0,
-    'p': 0, 'q': 0, 'r': 0, 's': 0, 't': 0,
-    'u': 0, 'v': 0, 'w': 0, 'x': 0, 'y': 0, 'z': 0
-  }
+  alphabet = { }
 
   for i in range(len(words)):
     if words[i] in alphabet:
       alphabet[words[i]] += 1
+    elif words[i].isalpha():
+      # set key only if it is alphabetical letter
+      alphabet.setdefault(words[i], 1)
 
-  print(alphabet)
+  for key,value in alphabet.items():
+    print(f"The {key} character was found {value} times")
 
 def countWords(words):
   words = words.split()
@@ -22,7 +19,7 @@ def countWords(words):
   for word in words:
     count += 1
 
-  print(count)
+  print(f"{count} words were found in the document")
 
 def main():
   with open("books/frankenstein.txt") as f:
@@ -31,5 +28,7 @@ def main():
     countWords(file_contents)
     countChars(file_contents)
 
+  print("-- End Report --")
+  
 main()
 
